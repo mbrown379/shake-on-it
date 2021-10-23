@@ -10,7 +10,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+<<<<<<< HEAD
+    "@ant-design/react-native": "^4.2.0",
+=======
     "@material-ui/core": "^4.12.3",
+>>>>>>> 237f10206939fad771d0846a26aec99cccea930a
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^12.9.1",
     "@react-native-firebase/auth": "^12.9.3",
