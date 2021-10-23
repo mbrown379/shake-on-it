@@ -49,6 +49,7 @@ const SignupScreen = ({navigation}) => {
 
       <FormButton
         buttonTitle="Sign Up"
+        style={styles.signupButton}
         onPress={() => register(email, password)}
       />
 
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 28,
     marginBottom: 10,
-    color: '#051d5f',
+    color: '#00C244',
   },
   navButton: {
     marginTop: 15,
@@ -82,17 +83,16 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5'
+    color: '#00C244'
   },
-  textPrivate: {
+  signupButton: {
+    backgroundColor: '#00C244',
+    marginTop: 20,
+    height: 50,
+    borderRadius: 5,
+    width: '100%',
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginVertical: 35,
     justifyContent: 'center',
-  },
-  color_textPrivate: {
-    fontSize: 13,
-    fontWeight: '400',
-    color: 'grey'
-  },
+    alignItems: 'center'
+  }
 });
