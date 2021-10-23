@@ -25,11 +25,14 @@ export const AuthProvider = ({ children }) => {
             .then(() => {
               firestore().collection('users').doc(auth().currentUser.uid)
               .set({
-                  fname: '',
-                  lname: '',
+                  firstname: '',
+                  lastname: '',
                   email: email,
+                  accountBalance: 150.0,
+                  bets: [],
+                  friends: [],
                   createdAt: firestore.Timestamp.fromDate(new Date()),
-                  userImg: null,
+                  userImg: null
               })
               .catch(error => {
                   console.log('Something went wrong with added user to firestore: ', error);

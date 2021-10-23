@@ -15,9 +15,6 @@ import { AuthContext } from '../navigation/AuthProvider';
 const ProfileScreen = ({ navigation, route }) => {
   const { user, logout } = useContext(AuthContext);
 
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [deleted, setDeleted] = useState(false);
   const [userData, setUserData] = useState(null);
 
   const getUser = async () => {
@@ -33,8 +30,6 @@ const ProfileScreen = ({ navigation, route }) => {
       })
   }
 
-  const handleDelete = () => { };
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <ScrollView
@@ -45,55 +40,34 @@ const ProfileScreen = ({ navigation, route }) => {
           style={styles.userImg}
           source={{ uri: userData ? userData.userImg || 'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg' : 'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg' }}
         />
-        <Text style={styles.userName}>{userData ? userData.fname || 'Test' : 'Test'} {userData ? userData.lname || 'User' : 'User'}</Text>
-        {/* <Text>{route.params ? route.params.userId : user.uid}</Text> */}
+        <Text style={styles.userName}>{userData ? userData.firstname || 'Test' : 'Test'} {userData ? userData.lname || 'User' : 'User'}</Text>
+        <Text style={styles.userName}>{userData ? userData.firstname || '@testuser' : '@testuser'}</Text>
         <Text style={styles.aboutUser}>
           {userData ? userData.about || 'No details added.' : ''}
         </Text>
         <View style={styles.userBtnWrapper}>
-          {route.params ? (
-            <>
-              <TouchableOpacity style={styles.userBtn} onPress={() => { }}>
-                <Text style={styles.userBtnTxt}>Message</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.userBtn} onPress={() => { }}>
-                <Text style={styles.userBtnTxt}>Follow</Text>
-              </TouchableOpacity>
-            </>
-          ) : (
-            <>
-              <TouchableOpacity
-                style={styles.userBtn}
-                onPress={() => {
-                  navigation.navigate('EditProfile');
-                }}>
-                <Text style={styles.userBtnTxt}>Edit</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.userBtn} onPress={() => logout()}>
-                <Text style={styles.userBtnTxt}>Logout</Text>
-              </TouchableOpacity>
-            </>
-          )}
+            <TouchableOpacity
+              style={styles.userBtn}
+              onPress={() => {
+                navigation.navigate('EditProfile');
+              }}>
+              <Text style={styles.userBtnTxt}>Edit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.userBtn} onPress={() => logout()}>
+              <Text style={styles.userBtnTxt}>Transfer Balance</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.userBtn} onPress={() => logout()}>
+              <Text style={styles.userBtnTxt}>Logout</Text>
+            </TouchableOpacity>
         </View>
 
         <View style={styles.userInfoWrapper}>
           <View style={styles.userInfoItem}>
-            <Text style={styles.userInfoTitle}>{posts.length}</Text>
-            <Text style={styles.userInfoSubTitle}>Posts</Text>
-          </View>
-          <View style={styles.userInfoItem}>
-            <Text style={styles.userInfoTitle}>10,000</Text>
-            <Text style={styles.userInfoSubTitle}>Followers</Text>
-          </View>
-          <View style={styles.userInfoItem}>
-            <Text style={styles.userInfoTitle}>100</Text>
-            <Text style={styles.userInfoSubTitle}>Following</Text>
+            <Text style={styles.userInfoTitle}>$67.10</Text>
+            <Text style={styles.userInfoSubTitle}>Balance</Text>
           </View>
         </View>
 
-        {posts.map((item) => (
-          <PostCard key={item.id} item={item} onDelete={handleDelete} />
-        ))}
       </ScrollView>
     </SafeAreaView>
   );
