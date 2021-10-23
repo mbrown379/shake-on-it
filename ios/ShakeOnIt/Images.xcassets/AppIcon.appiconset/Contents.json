@@ -31,19 +31,19 @@
       "size" : "40x40"
     },
     {
-      "filename" : "appLogo120.png",
+      "filename" : "appLogo120.jpg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
-      "filename" : "appLogo180.png",
+      "filename" : "appLogo180.jpg",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
     },
     {
-      "filename" : "AppLogo.png",
+      "filename" : "appLogo.jpg",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"
