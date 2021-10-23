@@ -1,5 +1,11 @@
-import React, {useContext, useState} from 'react';
-import {Text, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
+import React, { useContext, useState } from 'react';
+import {
+  Image,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView
+} from 'react-native';
 
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
@@ -13,6 +19,10 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <Image
+        source={require('../assets/appLogo.jpg')}
+        style={styles.logo}
+      />
       <Text style={styles.text}>Shake On It</Text>
 
       <FormInput
@@ -35,6 +45,7 @@ const LoginScreen = ({navigation}) => {
 
       <FormButton
         buttonTitle="Sign In"
+        style={styles.loginButton}
         onPress={() => login(email, password)}
       />
 
@@ -70,7 +81,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 28,
     marginBottom: 10,
-    color: '#051d5f',
+    color: '#00C244',
   },
   navButton: {
     marginTop: 15,
@@ -81,6 +92,16 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5',
+    color: '#00C244'
   },
+  loginButton: {
+    backgroundColor: '#00C244',
+    marginTop: 20,
+    height: 50,
+    borderRadius: 5,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
