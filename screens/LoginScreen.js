@@ -20,7 +20,7 @@ const LoginScreen = ({navigation}) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <Image
-        source={require('../assets/appLogo.jpg')}
+        source={require('../assets/appLogoTransparent.png')}
         style={styles.logo}
       />
       <Text style={styles.text}>Shake On It</Text>
