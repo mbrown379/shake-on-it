@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
 import BetCard from '../components/BetCard';
 
@@ -29,19 +29,21 @@ const styles = StyleSheet.create({
     padding: 10,
     fontSize: 18,
     height: 44,
-  },
+  }
 });
 
+
+
 const HomeScreen = ({ navigation }) => {
+  const renderBet = ({item}) => {
+    <BetCard props={item}></BetCard>
+  }
   return (
     <View style={styles.container}>
       <FlatList
-        data={this.betsList}
-        renderItem={({item})=>
-            <BetCard props={item}>
-            </BetCard>
-        }
-        keyExtractor={item=item.id}
+        data={betsList}
+        renderItem ={renderBet}
+        keyExtractor={ item => item.id.users}
       />
     </View>
   );
