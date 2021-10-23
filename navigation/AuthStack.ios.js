@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {View} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import SignupScreen from '../screens/SignupScreen';
@@ -10,7 +10,7 @@ const Stack = createStackNavigator();
 
 const AuthStack = () => {
   return (
-    <Stack.Navigator initialRouteName={"Login"}>
+    <Stack.Navigator initialRouteName={'Login'}>
       <Stack.Screen
         name="Login"
         component={LoginScreen}
@@ -19,7 +19,7 @@ const AuthStack = () => {
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
-        options={({ navigation }) => ({
+        options={({navigation}) => ({
           title: '',
           headerStyle: {
             backgroundColor: '#f9fafd',
@@ -28,7 +28,7 @@ const AuthStack = () => {
           },
           headerLeft: () => (
             <View style={{marginLeft: 10}}>
-              <FontAwesome.Button 
+              <FontAwesome.Button
                 name="long-arrow-left"
                 size={25}
                 backgroundColor="#f9fafd"

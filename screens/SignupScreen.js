@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#00C244'
+    color: '#00C244',
   },
   signupButton: {
     backgroundColor: '#00C244',
@@ -88,6 +88,6 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });

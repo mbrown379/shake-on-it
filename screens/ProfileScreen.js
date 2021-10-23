@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -10,10 +10,10 @@ import {
 } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 
-import { AuthContext } from '../navigation/AuthProvider';
+import {AuthContext} from '../navigation/AuthProvider';
 
-const ProfileScreen = ({ navigation, route }) => {
-  const { user, logout } = useContext(AuthContext);
+const ProfileScreen = ({navigation, route}) => {
+  const {user, logout} = useContext(AuthContext);
 
   const [userData, setUserData] = useState(null);
 
@@ -22,43 +22,53 @@ const ProfileScreen = ({ navigation, route }) => {
       .collection('users')
       .doc(route.params ? route.params.userId : user.uid)
       .get()
-      .then((documentSnapshot) => {
+      .then(documentSnapshot => {
         if (documentSnapshot.exists) {
           console.log('User Data', documentSnapshot.data());
           setUserData(documentSnapshot.data());
         }
-      })
-  }
+      });
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <ScrollView
         style={styles.container}
-        contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+        contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
         showsVerticalScrollIndicator={false}>
         <Image
           style={styles.userImg}
-          source={{ uri: userData ? userData.userImg || 'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg' : 'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg' }}
+          source={{
+            uri: userData
+              ? userData.userImg ||
+                'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg'
+              : 'https://lh5.googleusercontent.com/-b0PKyNuQv5s/AAAAAAAAAAI/AAAAAAAAAAA/AMZuuclxAM4M1SCBGAO7Rp-QP6zgBEUkOQ/s96-c/photo.jpg',
+          }}
         />
-        <Text style={styles.userName}>{userData ? userData.firstname || 'Test' : 'Test'} {userData ? userData.lname || 'User' : 'User'}</Text>
-        <Text style={styles.userName}>{userData ? userData.firstname || '@testuser' : '@testuser'}</Text>
+        <Text style={styles.userName}>
+          {userData ? userData.firstname || 'Test' : 'Test'}{' '}
+          {userData ? userData.lname || 'User' : 'User'}
+        </Text>
+        <Text style={styles.userName}>
+          {userData ? userData.firstname || '@testuser' : '@testuser'}
+        </Text>
         <Text style={styles.aboutUser}>
           {userData ? userData.about || 'No details added.' : ''}
         </Text>
         <View style={styles.userBtnWrapper}>
-            <TouchableOpacity
-              style={styles.userBtn}
-              onPress={() => {
-                navigation.navigate('EditProfile');
-              }}>
-              <Text style={styles.userBtnTxt}>Edit</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.userBtn} onPress={() => logout()}>
-              <Text style={styles.userBtnTxt}>Transfer Balance</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.userBtn} onPress={() => logout()}>
-              <Text style={styles.userBtnTxt}>Logout</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.userBtn}
+            onPress={() => {
+              navigation.navigate('EditProfile');
+            }}>
+            <Text style={styles.userBtnTxt}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.userBtn} onPress={() => logout()}>
+            <Text style={styles.userBtnTxt}>Transfer Balance</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.userBtn} onPress={() => logout()}>
+            <Text style={styles.userBtnTxt}>Logout</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.userInfoWrapper}>
@@ -67,7 +77,6 @@ const ProfileScreen = ({ navigation, route }) => {
             <Text style={styles.userInfoSubTitle}>Balance</Text>
           </View>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );

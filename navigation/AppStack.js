@@ -1,7 +1,7 @@
 import React from 'react';
-import { View } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {View} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -9,11 +9,12 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import HomeScreen from '../screens/HomeScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import EditProfileScreen from '../screens/EditProfileScreen';
+import CreateBetScreen from '../screens/CreateBetScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const FeedStack = ({ navigation }) => (
+const FeedStack = ({navigation}) => (
   <Stack.Navigator>
     <Stack.Screen
       name="Feed"
@@ -35,10 +36,24 @@ const FeedStack = ({ navigation }) => (
               size={22}
               backgroundColor="#fff"
               color="#2e64e5"
-              onPress={() => navigation.navigate('AddPost')} // TODO: change to create bet
+              onPress={() => navigation.navigate('CreateBet')}
             />
           </View>
         ),
+      }}
+    />
+    <Stack.Screen
+      name="CreateBet"
+      component={CreateBetScreen}
+      options={{
+        headerTitle: 'Create Bet',
+        headerBackTitleVisible: false,
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#fff',
+          shadowColor: '#fff',
+          elevation: 0,
+        },
       }}
     />
     <Stack.Screen
@@ -63,7 +78,7 @@ const FeedStack = ({ navigation }) => (
   </Stack.Navigator>
 );
 
-const ProfileStack = ({ navigation }) => (
+const ProfileStack = ({navigation}) => (
   <Stack.Navigator>
     <Stack.Screen
       name="Profile"
@@ -90,7 +105,7 @@ const ProfileStack = ({ navigation }) => (
 );
 
 const AppStack = () => {
-  const getTabBarVisibility = (route) => {
+  const getTabBarVisibility = route => {
     const routeName = route.state
       ? route.state.routes[route.state.index].name
       : '';
@@ -109,9 +124,9 @@ const AppStack = () => {
       <Tab.Screen
         name="Home"
         component={FeedStack}
-        options={({ route }) => ({
+        options={({route}) => ({
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="home-outline"
               color={color}
@@ -124,7 +139,7 @@ const AppStack = () => {
         name="Profile"
         component={ProfileStack}
         options={{
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({color, size}) => (
             <Ionicons name="person-outline" color={color} size={size} />
           ),
         }}

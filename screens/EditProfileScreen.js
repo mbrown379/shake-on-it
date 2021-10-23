@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -19,35 +19,35 @@ import ImagePicker from 'react-native-image-crop-picker';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 
-import { AuthContext } from '../navigation/AuthProvider';
+import {AuthContext} from '../navigation/AuthProvider';
 import FormButton from '../components/FormButton';
 
 const EditProfileScreen = () => {
-  const { user, logout } = useContext(AuthContext);
+  const {user, logout} = useContext(AuthContext);
 
   const [image, setImage] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [transferred, setTransferred] = useState(0);
   const [userData, setUserData] = useState(null);
 
-  const getUser = async() => {
+  const getUser = async () => {
     const currentUser = await firestore()
       .collection('users')
       .doc(user.uid)
       .get()
-      .then((documentSnapshot) => {
+      .then(documentSnapshot => {
         if (documentSnapshot.exists) {
-            console.log('User Data', documentSnapshot.data());
-            setUserData(documentSnapshot.data());
+          console.log('User Data', documentSnapshot.data());
+          setUserData(documentSnapshot.data());
         }
       });
-  }
+  };
 
   const handleUpdate = async () => {
     let imgUrl = await uploadImage();
 
     if (imgUrl == null && userData.userImg) {
-        imgUrl = userData.userImg;
+      imgUrl = userData.userImg;
     }
 
     firestore()
@@ -56,16 +56,16 @@ const EditProfileScreen = () => {
       .update({
         firstname: userData.firstname,
         lastname: userData.lastname,
-        userImg: imgUrl
-    })
-    .then(() => {
-      console.log('User Updated!');
-      Alert.alert(
-        'Profile Updated!',
-        'Your profile has been updated successfully.'
-      );
-    })
-  }
+        userImg: imgUrl,
+      })
+      .then(() => {
+        console.log('User Updated!');
+        Alert.alert(
+          'Profile Updated!',
+          'Your profile has been updated successfully.',
+        );
+      });
+  };
 
   const uploadImage = async () => {
     if (image == null) {
@@ -76,7 +76,7 @@ const EditProfileScreen = () => {
     let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
 
     // Add timestamp to File Name
-    const extension = filename.split('.').pop(); 
+    const extension = filename.split('.').pop();
     const name = filename.split('.').slice(0, -1).join('.');
     filename = name + Date.now() + '.' + extension;
 
@@ -87,7 +87,7 @@ const EditProfileScreen = () => {
     const task = storageRef.putFile(uploadUri);
 
     // Set transferred state
-    task.on('state_changed', (taskSnapshot) => {
+    task.on('state_changed', taskSnapshot => {
       console.log(
         `${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`,
       );
@@ -107,7 +107,6 @@ const EditProfileScreen = () => {
       setImage(null);
 
       return url;
-
     } catch (e) {
       console.log(e);
       return null;
@@ -124,7 +123,7 @@ const EditProfileScreen = () => {
       compressImageMaxHeight: 300,
       cropping: true,
       compressImageQuality: 0.7,
-    }).then((image) => {
+    }).then(image => {
       console.log(image);
       const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
       setImage(imageUri);
@@ -138,7 +137,7 @@ const EditProfileScreen = () => {
       height: 300,
       cropping: true,
       compressImageQuality: 0.7,
-    }).then((image) => {
+    }).then(image => {
       console.log(image);
       const imageUri = Platform.OS === 'ios' ? image.sourceURL : image.path;
       setImage(imageUri);
@@ -253,7 +252,7 @@ const EditProfileScreen = () => {
             placeholderTextColor="#666666"
             autoCorrect={false}
             value={userData ? userData.fname : ''}
-            onChangeText={(txt) => setUserData({...userData, fname: txt})}
+            onChangeText={txt => setUserData({...userData, fname: txt})}
             style={styles.textInput}
           />
         </View>
@@ -263,7 +262,7 @@ const EditProfileScreen = () => {
             placeholder="Last Name"
             placeholderTextColor="#666666"
             value={userData ? userData.lname : ''}
-            onChangeText={(txt) => setUserData({...userData, lname: txt})}
+            onChangeText={txt => setUserData({...userData, lname: txt})}
             autoCorrect={false}
             style={styles.textInput}
           />

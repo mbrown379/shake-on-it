@@ -1,20 +1,20 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, {useContext, useState, useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 
-import { AuthContext } from './AuthProvider.ios';
+import {AuthContext} from './AuthProvider.ios';
 import AuthStack from './AuthStack.ios';
 import AppStack from './AppStack';
 
 const Routes = () => {
-  const { user, setUser } = useContext(AuthContext);
+  const {user, setUser} = useContext(AuthContext);
   const [initializing, setInitializing] = useState(true);
 
-  const onAuthStateChanged = (user) => {
+  const onAuthStateChanged = user => {
     setUser(user);
 
     if (initializing) {
-        setInitializing(false);
+      setInitializing(false);
     }
   };
 

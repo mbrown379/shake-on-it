@@ -1,24 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import {
-  SafeAreaView,
-  Text,
-  StyleSheet,
-  View,
-  FlatList
-} from 'react-native';
-import { SearchBar } from 'react-native-elements';
+import React, {useState, useEffect} from 'react';
+import {SafeAreaView, Text, StyleSheet, View, FlatList} from 'react-native';
+import {SearchBar} from 'react-native-elements';
 
 const CreateBetScreen = () => {
   const [search, setSearch] = useState('');
+  const [filteredDataSource, setFilteredDataSource] = useState('');
 
-  const searchFilterFunction = (text) => {
+  const searchFilterFunction = text => {
     // Check if searched text is not blank
     if (text) {
       // Inserted text is not blank
       // Filter the masterDataSource
       // Update FilteredDataSource
       const newData = masterDataSource.filter(function (item) {
-        const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : ''.toUpperCase();
         const textData = text.toUpperCase();
         return itemData.indexOf(textData) > -1;
       });
@@ -35,12 +32,10 @@ const CreateBetScreen = () => {
   const ItemView = ({item}) => {
     return (
       // Flat List Item
-      <Text
-        style={styles.itemStyle}
-        onPress={() => getItem(item)}>
-          {item.id}
-          {'.'}
-          {item.title.toUpperCase()}
+      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
+        {item.id}
+        {'.'}
+        {item.title.toUpperCase()}
       </Text>
     );
   };
@@ -58,7 +53,7 @@ const CreateBetScreen = () => {
     );
   };
 
-  const getItem = (item) => {
+  const getItem = item => {
     // Function for click on an item
     alert('Id : ' + item.id + ' Title : ' + item.title);
   };
@@ -69,8 +64,8 @@ const CreateBetScreen = () => {
         <SearchBar
           round
           searchIcon={{size: 24}}
-          onChangeText={(text) => searchFilterFunction(text)}
-          onClear={(text) => searchFilterFunction('')}
+          onChangeText={text => searchFilterFunction(text)}
+          onClear={text => searchFilterFunction('')}
           placeholder="Search Users..."
           value={search}
         />

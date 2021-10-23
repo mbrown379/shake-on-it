@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, {useContext, useState} from 'react';
 import {
   Image,
   Text,
   TouchableOpacity,
   StyleSheet,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 
 import FormInput from '../components/FormInput';
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#00C244'
+    color: '#00C244',
   },
   loginButton: {
     backgroundColor: '#00C244',
@@ -102,6 +102,6 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
