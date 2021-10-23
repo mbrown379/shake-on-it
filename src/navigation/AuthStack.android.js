@@ -9,10 +9,8 @@ import LoginScreen from '../screens/LoginScreen';
 const Stack = createStackNavigator();
 
 const AuthStack = () => {
-  let routeName = 'Login';
-  
   return (
-    <Stack.Navigator initialRouteName={routeName}>
+    <Stack.Navigator initialRouteName={"Signup"}>
       <Stack.Screen
         name="Login"
         component={LoginScreen}

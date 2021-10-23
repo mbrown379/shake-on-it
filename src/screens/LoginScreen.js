@@ -1,80 +1,91 @@
-import React, { useState } from "react";
-import { 
-    View,
-    Text,
-    TextInput,
-    StyleSheet
-} from "react-native";
-import auth from "@react-native-firebase/auth";
+import React, { useContext, useState } from 'react';
+import {
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView
+} from 'react-native';
 
-import LoginButton from "../components/LoginButton";
+import FormInput from '../components/FormInput';
+import FormButton from '../components/FormButton';
+import { AuthContext } from '../navigation/AuthProvider';
 
-const styles = StyleSheet.create({
-    container: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 20,
-      paddingTop: 50
-    },
-    logo: {
-      height: 150,
-      width: 150,
-      resizeMode: 'cover',
-    },
-    text: {
-      fontSize: 28,
-      marginBottom: 10,
-      color: '#051d5f',
-    },
-    header: {
-      marginTop: 15,
-    },
-    input: {
-      marginVertical: 35,
-    },
-    form: {
-      fontSize: 18,
-      fontWeight: '500',
-      color: '#2e64e5'
-    }
-});
+const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-const LoginScreen = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    
-    const login = () => {
-        auth()
-          .signInWithEmailAndPassword(email, password)
-          .catch(error => {
-              setError(error.message);
-          });
-    };
-    
-    return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.text}>Login</Text>
-            </View>
-            <View style={styles.form}>
-                <Text style={styles.text}>Email</Text>
-                <TextInput
-                    style={styles.input}
-                    autoCapitalize="none"
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
-                />
-                <Text style={styles.text}>Password</Text>
-                <TextInput
-                    style={styles.input}
-                    autoCapitalize="none"
-                    onChangeText={(text) => setPassword(text)}
-                />
-                <LoginButton onPress={login}>Login</LoginButton>
-            </View>
-        </View>
-    );
-}
+  const { login } = useContext(AuthContext);
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.text}>Shake On It</Text>
+
+      <FormInput
+        labelValue={email}
+        onChangeText={(userEmail) => setEmail(userEmail)}
+        placeholderText="Email"
+        iconType="user"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
+
+      <FormInput
+        labelValue={password}
+        onChangeText={(userPassword) => setPassword(userPassword)}
+        placeholderText="Password"
+        iconType="lock"
+        secureTextEntry={true}
+      />
+
+      <FormButton
+        buttonTitle="Sign In"
+        onPress={() => login(email, password)}
+      />
+
+      <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
+        <Text style={styles.navButtonText}>Forgot Password?</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.forgotButton}
+        onPress={() => navigation.navigate('Signup')}>
+        <Text style={styles.navButtonText}>
+          Don't have an acount? Create here
+        </Text>
+      </TouchableOpacity>
+    </ScrollView>
+  );
+};
 
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    paddingTop: 50
+  },
+  logo: {
+    height: 150,
+    width: 150,
+    resizeMode: 'cover',
+  },
+  text: {
+    fontSize: 28,
+    marginBottom: 10,
+    color: '#051d5f',
+  },
+  navButton: {
+    marginTop: 15,
+  },
+  forgotButton: {
+    marginVertical: 35,
+  },
+  navButtonText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#2e64e5'
+  },
+});
