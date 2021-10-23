@@ -1,21 +1,16 @@
-import React, { useContext, useState } from 'react';
-import { 
-    View,
-    Text,
-    TouchableOpacity,
-    StyleSheet
-} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
-import { AuthContext } from '../navigation/AuthProvider';
+import {AuthContext} from '../navigation/AuthProvider';
 
 const SignupScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
-  const { register } = useContext(AuthContext);
+  const {register} = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -23,7 +18,7 @@ const SignupScreen = ({navigation}) => {
 
       <FormInput
         labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
+        onChangeText={userEmail => setEmail(userEmail)}
         placeholderText="Email"
         iconType="user"
         keyboardType="email-address"
@@ -33,7 +28,7 @@ const SignupScreen = ({navigation}) => {
 
       <FormInput
         labelValue={password}
-        onChangeText={(userPassword) => setPassword(userPassword)}
+        onChangeText={userPassword => setPassword(userPassword)}
         placeholderText="Password"
         iconType="lock"
         secureTextEntry={true}
@@ -41,7 +36,7 @@ const SignupScreen = ({navigation}) => {
 
       <FormInput
         labelValue={confirmPassword}
-        onChangeText={(userPassword) => setConfirmPassword(userPassword)}
+        onChangeText={userPassword => setConfirmPassword(userPassword)}
         placeholderText="Confirm Password"
         iconType="lock"
         secureTextEntry={true}
@@ -97,7 +92,7 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5'
+    color: '#2e64e5',
   },
   textPrivate: {
     flexDirection: 'row',
@@ -108,6 +103,6 @@ const styles = StyleSheet.create({
   color_textPrivate: {
     fontSize: 13,
     fontWeight: '400',
-    color: 'grey'
+    color: 'grey',
   },
 });
