@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import {
+  Image,
   Text,
   TouchableOpacity,
   StyleSheet,
@@ -8,21 +9,25 @@ import {
 
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
-import { AuthContext } from '../navigation/AuthProvider';
+import {AuthContext} from '../navigation/AuthProvider';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({navigation}) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const { login } = useContext(AuthContext);
+  const {login} = useContext(AuthContext);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <Image
+        source={require('../assets/appLogoTransparent.png')}
+        style={styles.logo}
+      />
       <Text style={styles.text}>Shake On It</Text>
 
       <FormInput
         labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
+        onChangeText={userEmail => setEmail(userEmail)}
         placeholderText="Email"
         iconType="user"
         keyboardType="email-address"
@@ -32,7 +37,7 @@ const LoginScreen = ({ navigation }) => {
 
       <FormInput
         labelValue={password}
-        onChangeText={(userPassword) => setPassword(userPassword)}
+        onChangeText={userPassword => setPassword(userPassword)}
         placeholderText="Password"
         iconType="lock"
         secureTextEntry={true}
@@ -40,6 +45,7 @@ const LoginScreen = ({ navigation }) => {
 
       <FormButton
         buttonTitle="Sign In"
+        style={styles.loginButton}
         onPress={() => login(email, password)}
       />
 
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    paddingTop: 50
+    paddingTop: 50,
   },
   logo: {
     height: 150,
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 28,
     marginBottom: 10,
-    color: '#051d5f',
+    color: '#00C244',
   },
   navButton: {
     marginTop: 15,
@@ -86,6 +92,16 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5'
+    color: '#00C244'
   },
+  loginButton: {
+    backgroundColor: '#00C244',
+    marginTop: 20,
+    height: 50,
+    borderRadius: 5,
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
